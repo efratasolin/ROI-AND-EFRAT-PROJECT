@@ -3,6 +3,7 @@ from pygame import mixer
 import random
 from Train import Train
 from Player import *
+from Constans import *
 
 pygame.init()
 timer = 0
@@ -16,7 +17,6 @@ mixer.music.play()
 # create the display surface object
 # of specific dimension..e(500, 500).
 win = pygame.display.set_mode((500, 500))
-
 img = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\backgroundd.jpeg")
 img = pygame.transform.scale(img, (500, 500))
 win.blit(img, (0, 0))
@@ -25,7 +25,6 @@ win.blit(img, (0, 0))
 #     font = pygame.font.SysFont('ariel', 30)
 #     score = font.render(f"score:{self.}", True, (0, 0, 0))
 #     self.surface.blit(score, (400, 10))
-
 
 def draw_obstacles(lanes):
     train9 = 0
@@ -56,27 +55,8 @@ def draw_obstacles(lanes):
 # set the pygame window name
 pygame.display.set_caption("ROI AND EFRAT")
 
-player_x = 135
-player_y = 250
-obstacle_y = 0
-
-LANE1_X = 0
-LANE2_X = 165
-LANE3_X = 400
-LANE_DISTANCE = 200
-
 lanes = []
 
-# dimensions of the object
-width = 230
-height = 230
-
-Obstacle_in_width = 75
-Obstacle_in_height = 75
-
-# velocity / speed of movement
-vel = 2.5
-vel2 = 25
 # Indicates pygame is running
 run = True
 
@@ -125,10 +105,10 @@ while run:
     if obstacle_y == 500:
         obstacle_y = 0
 
-    print(obstacle_y)
+    #print(obstacle_y)
     if obstacle_y >= 500 or obstacle_y <= 0:
         lanes = random.sample(range(0, 3), 2)
-    train9,train6,train7 = draw_obstacles(lanes)
+    train9, train6, train7 = draw_obstacles(lanes)
 
     obstacle_y += vel
 
@@ -138,22 +118,37 @@ while run:
     img4 = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\JAKE.png")
     img4 = pygame.transform.scale(img4, (width, height))
     win.blit(img4, (player_x, player_y))
-
-    TRAIN_LENGTH = 150
-    TRAIN_HEIGHT = 100
-
+    print(player_x)
     if train6 != 0:
-        if train6.x < player_x < train6.x + TRAIN_LENGTH:
-            if train6.y < player_y < train6.y + TRAIN_HEIGHT:
+        if train6.x < player_x and player_x < train6.x + TRAIN_LENGTH:
+            if train6.y < player_y and player_y < train6.y + TRAIN_HEIGHT:
+                print('6')
+                print(train6.x)
+                print(train6.y)
+                print(player_x)
+                print(player_y)
                 run = False
+                pygame.QUIT
     if train7 != 0:
-        if train7.x < player_x < train7.x + TRAIN_LENGTH:
-            if train7.y < player_y < train7.y + TRAIN_HEIGHT:
+        if train7.x < player_x and player_x < train7.x + TRAIN_LENGTH:
+            if train7.y < player_y and player_y < train7.y + TRAIN_HEIGHT:
+                print('7')
+                print(train7.x)
+                print(train7.y)
+                print(player_x)
+                print(player_y)
                 run = False
+                pygame.QUIT
     if train9 != 0:
-        if train9.x < player_x < train9.x + TRAIN_LENGTH:
-            if train9.y < player_y < train9.y + TRAIN_HEIGHT:
+        if train9.x < player_x and player_x < train9.x + TRAIN_LENGTH:
+            if train9.y < player_y and player_y < train9.y + TRAIN_HEIGHT:
+                print('9')
+                print(train9.x)
+                print(train9.y)
+                print(player_x)
+                print(player_y)
                 run = False
+                pygame.QUIT
 
     # pygame.draw.rect(win, (255, 0, 0), (425, obstacle_y, Obstacle_in_width, Obstacle_in_height))
     # pygame.draw.rect(win, (255, 0, 0), (225, obstacle_y, Obstacle_in_width, Obstacle_in_height))
