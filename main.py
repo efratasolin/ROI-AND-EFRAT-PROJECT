@@ -21,9 +21,25 @@ mixer.music.play()
 # create the display surface object
 # of specific dimension..e(500, 500).
 win = pygame.display.set_mode((500, 500))
+open1 = pygame.image.load("C:\\Users\\User\\PycharmProjects\\ROI-AND-EFRAT-PROJECT\\open.jpeg")
+open1 = pygame.transform.scale(open1, (500, 500))
+win.blit(open1, (0, 0))
+pygame.display.update()
+
+spase_pressed = False
+while spase_pressed == False:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                spase_pressed = True
+
+win = pygame.display.set_mode((500, 500))
+win = pygame.display.set_mode((500, 500))
 img = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\backgroundd.jpeg")
 img = pygame.transform.scale(img, (500, 500))
 win.blit(img, (0, 0))
+
 
 def draw_obstacles(lanes):
     train9 = 0
@@ -106,15 +122,14 @@ while run:
         lanes = random.sample(range(0, 3), 2)
     train9, train6, train7 = draw_obstacles(lanes)
 
-    obstacle_y += vel + timer * 0.001
+    obstacle_y += vel + timer * speed
 
     img4 = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\JAKE.png")
     img4 = pygame.transform.scale(img4, (width, height))
     win.blit(img4, (player_x, player_y))
-    print(player_x)
     if train6 != 0:
         if train6.x - TRAIN_LENGTH < player_x and player_x < train6.x:
-            if train6.y < player_y and player_y < train6.y + TRAIN_HEIGHT:
+            if train6.y - TRAIN_HEIGHT < player_y < train6.y:
                 print('6')
                 print(train6.x)
                 print(train6.y)
@@ -123,7 +138,7 @@ while run:
                 run = False
     if train7 != 0:
         if train7.x - TRAIN_LENGTH < player_x and player_x < train7.x:
-            if train7.y < player_y and player_y < train7.y + TRAIN_HEIGHT:
+            if train7.y - TRAIN_HEIGHT < player_y < train7.y:
                 print('7')
                 print(train7.x)
                 print(train7.y)
@@ -132,7 +147,7 @@ while run:
                 run = False
     if train9 != 0:
         if train9.x - TRAIN_LENGTH < player_x and player_x < train9.x:
-            if train9.y < player_y and player_y < train9.y + TRAIN_HEIGHT:
+            if train9.y - TRAIN_HEIGHT < player_y < train9.y:
                 print('9')
                 print(train9.x)
                 print(train9.y)
@@ -153,6 +168,13 @@ color = (0, 0, 0)
 font = pygame.font.SysFont(font_name, text_size)
 win.blit(font.render(text, True, color), (330, 90))
 
+
 pygame.display.update()
 
-time.sleep(3)
+spase_pressed = False
+while spase_pressed == False:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                spase_pressed = True
