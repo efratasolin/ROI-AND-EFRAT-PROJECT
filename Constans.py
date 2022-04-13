@@ -20,3 +20,5 @@ TRAIN_HEIGHT = 100
 # velocity / speed of movement
 vel = 2.5
 vel2 = 25
+
+speed = 0.003

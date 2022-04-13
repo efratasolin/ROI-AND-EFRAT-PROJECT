@@ -127,6 +127,7 @@ while run:
     img4 = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\JAKE.png")
     img4 = pygame.transform.scale(img4, (width, height))
     win.blit(img4, (player_x, player_y))
+
     if train6 != 0:
         if train6.x - TRAIN_LENGTH < player_x and player_x < train6.x:
             if train6.y - TRAIN_HEIGHT < player_y < train6.y:
