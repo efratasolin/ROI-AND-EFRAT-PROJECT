@@ -6,8 +6,11 @@ from Train import Train
 from Player import *
 from Constans import *
 
+clock = pygame.time.Clock()
+
 pygame.init()
 timer = 0
+last_time = -100
 mixer.init()
 mixer.music.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\song.mp3")
 mixer.music.set_volume(0.7)
@@ -72,11 +75,15 @@ while run:
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_LEFT] and player_x > LANE1_X:
+    if keys[pygame.K_LEFT] and player_x > LANE1_X and last_time + 5 < timer:
+        last_time = timer
         player_x -= LANE_DISTANCE
 
-    if keys[pygame.K_RIGHT] and player_x < LANE3_X:
-        player_x += LANE_DISTANCE
+    if player_x < 150:
+        if keys[pygame.K_RIGHT] and player_x < LANE3_X and last_time + 5 < timer:
+            last_time = timer
+            player_x += LANE_DISTANCE
+
 
     win.fill((0, 0, 0))
     img = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\backgroundd.jpeg")
@@ -91,7 +98,7 @@ while run:
     win.blit(font.render(text, True, color), (410, 20))
     timer += 1
 
-    if obstacle_y == 500:
+    if obstacle_y >= 500:
         obstacle_y = 0
 
     print(obstacle_y)
@@ -99,7 +106,7 @@ while run:
         lanes = random.sample(range(0, 3), 2)
     train9, train6, train7 = draw_obstacles(lanes)
 
-    obstacle_y += vel
+    obstacle_y += vel + timer * 0.001
 
     img4 = pygame.image.load("C:\\Users\\User\\PycharmProjects\\project999999999999999\\project4\\JAKE.png")
     img4 = pygame.transform.scale(img4, (width, height))
@@ -132,6 +139,7 @@ while run:
                 print(player_x)
                 print(player_y)
                 run = False
+    clock.tick(30)
     pygame.display.update()
 
 win = pygame.display.set_mode((500, 500))
@@ -143,7 +151,7 @@ text_size = 40
 text = str(timer)
 color = (0, 0, 0)
 font = pygame.font.SysFont(font_name, text_size)
-win.blit(font.render(text, True, color), (310, 90))
+win.blit(font.render(text, True, color), (330, 90))
 
 pygame.display.update()
 
